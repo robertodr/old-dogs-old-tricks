@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euxo
+
+echo "$PWD"
+
+mkdir -p data
+
+# get reference data
+curl https://old-dogs-old-tricks-data.s3.eu-north-1.amazonaws.com/boys_reference.h5 --output data/boys_reference.h5
+
+# get computed data
+curl https://old-dogs-old-tricks-data.s3.eu-north-1.amazonaws.com/boys_computed.h5 --output data/boys_computed.h5

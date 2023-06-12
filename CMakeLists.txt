@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.13)
+
+project(Fnx LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+include(GNUInstallDirs)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+
+option(Fnx_USE_HIP "Compile HIP GPU version" OFF)
+
+set(CMAKE_HIP_ARCHITECTURES "gfx908")
+set(Fnx_HAS_HIP OFF)
+if(Fnx_USE_HIP)
+  enable_language(HIP)
+  set(Fnx_HAS_HIP ON)
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-ggdb ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+  set(CMAKE_CXX_FLAGS_DEBUG "-ggdb ${CMAKE_CXX_FLAGS_DEBUG}")
+endif()
+
+enable_language(C)
+find_package(HighFive 2.5 CONFIG REQUIRED)
+
+add_subdirectory(src)

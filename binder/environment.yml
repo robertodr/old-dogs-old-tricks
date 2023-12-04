@@ -5,6 +5,7 @@ dependencies:
   - h5py
   - numpy
   - plotly
+  - jupyterlab <4
   - python >=3.10
   - rich
   - scipy
